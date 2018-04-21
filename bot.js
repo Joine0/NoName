@@ -65,5 +65,5 @@ if (message.content.startsWith(prefix + 'help')) {
 	message.channel.sendEmbed(embed).then(m => m.delete(10000));
 }
 });
-client.login("process.env.BOT_TOKEN");
+client.login(process.env.BOT_TOKEN);
 //??????
