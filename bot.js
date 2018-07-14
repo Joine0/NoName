@@ -7,10 +7,9 @@ client.on('ready', () => {
     console.log(`[Users] ${client.users.size}`)
    client.user.setGame(("I'm Bot Log ."),`http://www.twitch.tv/rebel711`);
 });
-const guild = client.guilds.get("466632282266927124");
 client.on('channelCreate', async (channel) => {
   if(channel.type === 'dm') return;
-let logchannel = channel.guild.channels.find('name', 'log')
+let logchannel = client.channels.find('name', 'log')
        const entry = await guild.fetchAuditLogs({type: 'CHANNEL_CREATE'}).then(audit => audit.entries.first())
        let user = ""
     user = entry.executor
@@ -27,7 +26,7 @@ let logchannel = channel.guild.channels.find('name', 'log')
        });
 client.on('channelDelete', async (channel) => {
   if(channel.type === 'dm') return;
-let logchannel = channel.guild.channels.find('name', 'log')
+let logchannel = client.channels.find('name', 'log')
               const entry = await guild.fetchAuditLogs({type: 'CHANNEL_DELETE'}).then(audit => audit.entries.first())
        let user = ""
     user = entry.executor
@@ -48,7 +47,7 @@ let logchannel = channel.guild.channels.find('name', 'log')
 
 client.on("channelPinsUpdate", async channel => {
   console.log(`${channel.name}'s pins have been updated.`);
-let logchannel = channel.guild.channels.find('name', 'log')
+let logchannel = client.channels.find('name', 'log')
       var logemp= new Discord.RichEmbed()
        .setTitle("📝 | New Pin Created/Removed")
  .setColor('#0000FF')
@@ -58,7 +57,7 @@ let logchannel = channel.guild.channels.find('name', 'log')
 
 })
 client.on('messageUpdate', async  (oldMessega, newMessega) => {
-let logchannel = newMessega.guild.channels.find('name', 'log')
+let logchannel = client.channels.find('name', 'log')
 var user = oldMessega.author
    if(user.bot)return ;
       var logemp= new Discord.RichEmbed()
@@ -89,8 +88,7 @@ client.on("channelUpdate", async(oldChannel, newChannel) => {
       .addField("Old topic", `${oldChannel.topic}`)
       .addField("New topic", `${newChannel.topic}`)
   .setFooter(moment(Date.now()+10800000).format('llll'))
-
-      let mmodchannel = newChannel.guild.channels.find(`name`, "log");
+      let mmodchannel =  client.channels.find('name', 'log')
       mmodchannel.send(updateembed);
   }
   if(oldChannel.topic !== newChannel.topic && oldChannel.name !== newChannel.name) {
@@ -102,7 +100,7 @@ client.on("channelUpdate", async(oldChannel, newChannel) => {
       .addField("Old topic", `${oldChannel.topic}`)
       .addField("New topic", `${newChannel.topic}`)
   .setFooter(moment(Date.now()+10800000).format('llll'));
-      let mmodchannel = newChannel.guild.channels.find(`name`, "log");
+      let mmodchannel =  client.channels.find('name', 'log')
       mmodchannel.send(updateembed);
   }
   if(oldChannel.name !== newChannel.name && oldChannel.topic === newChannel.topic) {
@@ -112,7 +110,7 @@ client.on("channelUpdate", async(oldChannel, newChannel) => {
       .addField("Old name Channel", `${oldChannel.name}`)
       .addField("New name Channel", `${newChannel.name}`)
   .setFooter(moment(Date.now()+10800000).format('llll'));
-      let modchannel = newChannel.guild.channels.find(`name`, "log");
+      let modchannel =  client.channels.find('name', 'log')
       modchannel.send(updateembed);
   }
 
@@ -121,8 +119,7 @@ client.on("channelUpdate", async(oldChannel, newChannel) => {
 
 
 client.on('messageDelete', async  (message) => {
-let logchannel = message.guild.channels.find('name', 'log')
- 
+let logchannel =  client.channels.find('name', 'log')
        const entry = await message.guild.fetchAuditLogs({type: 'MESSAGE_DELETE'}).then(audit => audit.entries.first())
  let user = ""
     if (entry.extra.channel.id === message.channel.id
@@ -143,7 +140,7 @@ let logchannel = message.guild.channels.find('name', 'log')
        logchannel.send(logemp)
        });
 client.on('guildMemberRemove', member => {
-  const logchannel = member.guild.channels.find('name', 'log');
+  const logchannel =  client.channels.find('name', 'log')
          var logemp= new Discord.RichEmbed()
  .setColor('#ffff00')
 .setAuthor(`${member.user.username}#${member.user.discriminator}`, member.user.avatarURL)
@@ -160,7 +157,7 @@ Array.prototype.diff = function(a) {
 client.on('guildMemberUpdate', async (oldMember,newMember) => {
   let myrole = []
 
-let logchannel = newMember.guild.channels.find('name', 'log')
+let logchannel =  client.channels.find('name', 'log')
  
            const entry = await guild.fetchAuditLogs({type: 'MEMBER_ROLE_UPDATE'}).then(audit => audit.entries.first())
  let user = ""
@@ -195,7 +192,7 @@ myrole = roles2.diff(roles1)
 
 client.on("roleCreate", async rolc => {
 
-let logchannel = rolc.guild.channels.find('name', 'log')
+let logchannel =  client.channels.find('name', 'log')
             const entry = await guild.fetchAuditLogs({type: 'MEMBER_ROLE_CREATE'}).then(audit => audit.entries.first())
  let user = ""
     user = entry.executor
@@ -211,7 +208,7 @@ let logchannel = rolc.guild.channels.find('name', 'log')
 
 client.on("roleDelete",  async rold => {
 
-let logchannel = rold.guild.channels.find('name', 'log')
+let logchannel =  client.channels.find('name', 'log')
     const entry = await guild.fetchAuditLogs({type: 'MEMBER_ROLE_DELETE'}).then(audit => audit.entries.first())
  let user = ""
     user = entry.executor
@@ -224,7 +221,7 @@ let logchannel = rold.guild.channels.find('name', 'log')
       logchannel.send(logemp)
 });
 client.on('roleUpdate', async  (oldRole, newRole) => {
-let logchannel = newRole.guild.channels.find('name', 'log')
+let logchannel =  client.channels.find('name', 'log')
     const entry = await guild.fetchAuditLogs({type: 'MEMBER_ROLE_UPDATE'}).then(audit => audit.entries.first())
  let user = ""
     user = entry.executor
@@ -254,7 +251,7 @@ client.on("guildMemberUpdate", async(oldMember, newMember) =>{
       .addField("New nickname", `${newMember}`)
       .setTimestamp();
 
-      let modchannel = newMember.guild.channels.find(`name`, "log");
+      let modchannel =  client.channels.find('name', 'log')
       modchannel.send(nickembed)
 
   };
@@ -267,7 +264,7 @@ client.on("guildMemberUpdate", async(oldMember, newMember) =>{
       .addField("New roles", `${newMember.roles.array()}`)
       .setTimestamp();
 
-      let nmodchannel = newMember.guild.channels.find(`name`, "log");
+      let nmodchannel =  client.channels.find('name', 'log')
       nmodchannel.send(nroleembed);
 
   };
