@@ -6,7 +6,6 @@ client.on('ready', () => {
     console.log(`in ${client.guilds.size} servers `)
     console.log(`[Users] ${client.users.size}`)
    client.user.setGame(("I'm Bot Log ."),`http://www.twitch.tv/rebel711`);
-	client.user.setAvatar("https://cdn.discordapp.com/avatars/456837749396209674/567f1498f85cf4be80901ff66f345dfc.jpg?size=128");
 });
 const guild = client.guilds.get("466632282266927124");
 client.on('channelCreate', async (channel) => {
