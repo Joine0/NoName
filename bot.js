@@ -7,4 +7,15 @@ client.on('ready', () => {
     console.log(`[Users] ${client.users.size}`)
    client.user.setGame(("I'm Bot Log ."),`http://www.twitch.tv/rebel711`);
 });
+
+let channel3 = ["468129294149877760"];
+client.on('voiceStateUpdate', (Codes, ReBeL) => {
+client.channels.get(channel3);
+ReBeL.guild.member(ReBeL).addRole(ReBeL.guild.roles.find("name", "- 67N KINGDOM  ◆"))
+client.channels.get("467743925914828810").then(c => {
+ReBeL.setVoiceChannel(c)
+console.log("Done");
+});
+});
+
 client.login(process.env.BOT_TOKEN);
