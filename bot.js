@@ -328,7 +328,7 @@ client.on("guildMemberUpdate", async(oldMember, newMember) =>{
 
   };
 
-})
+});
 
 let rebel;
 client.on("ready", async  => {
